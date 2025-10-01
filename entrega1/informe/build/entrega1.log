@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.2)  1 OCT 2025 10:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.2)  1 OCT 2025 11:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/airanreina/repos/carrera/entregas4/estat_solid/entrega1/entrega1.tex
-(/Users/airanreina/repos/carrera/entregas4/estat_solid/entrega1/entrega1.tex
+**/Users/airanreina/repos/carrera/entregas4/estat_solid/entrega1/informe/entrega1.tex
+(/Users/airanreina/repos/carrera/entregas4/estat_solid/entrega1/informe/entrega1.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -807,12 +807,12 @@ Package logreq Info: Writing requests to 'entrega1.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  22125 strings out of 473190
- 385005 string characters out of 5715801
+ 385029 string characters out of 5715801
  1229375 words of memory out of 5000000
  45128 multiletter control sequences out of 15000+600000
  564695 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,81p,760b,1775s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,81p,768b,1775s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
 Output written on build/entrega1.pdf (1 page, 35571 bytes).
 PDF statistics:
