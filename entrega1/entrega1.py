@@ -116,6 +116,8 @@ def StructureFactorSC(G):
     S = 0
     for c_i in c:
         S += np.exp(2j * np.pi * (h*c_i[0] + k*c_i[1] + l*c_i[2]))
+    if np.abs(S) < 1e-10:
+        S = 0
     return S
 def StructureFactorBCC(G):
     h, k, l, mod = G
@@ -124,6 +126,8 @@ def StructureFactorBCC(G):
     S = 0
     for c_i in c:
         S += np.exp(2j * np.pi * (h*c_i[0] + k*c_i[1] + l*c_i[2]))
+    if np.abs(S) < 1e-10:
+        S = 0
     return S
 def StructureFactorFCC(G):
     h, k, l, mod = G
@@ -132,6 +136,8 @@ def StructureFactorFCC(G):
     S = 0
     for c_i in c:
         S += np.exp(2j * np.pi * (h*c_i[0] + k*c_i[1] + l*c_i[2]))
+    if np.abs(S) < 1e-10:
+        S = 0
     return S
 def StructureFactorDiamond(G):
     h, k, l, mod = G
@@ -141,6 +147,8 @@ def StructureFactorDiamond(G):
     S = 0
     for c_i in c:
         S += np.exp(2j * np.pi * (h*c_i[0] + k*c_i[1] + l*c_i[2]))
+    if np.abs(S) < 1e-10:
+        S = 0
     return S
 
 
@@ -157,17 +165,20 @@ mods = [modSC[:len(factorD)], modBCC[:len(factorD)], modFCC[:len(factorD)], modD
 for mod, name in zip(mods, ['SC', 'BCC', 'FCC', 'Diamond']):
 
     regLin = RegLin(factorD, mod)
-    x_min, x_max = 0.1, 0.7
+    x_min, x_max = 0, 0.7
+
+    a = 1/np.sqrt(regLin.pendent)
 
     plt.style.use('classic')
     plt.figure(figsize=(6,6), facecolor='white')
-    plt.plot(factorD, mod, 'o', label=r'$\frac{1}{d^2}(h^2 + k^2 + l^2)$', color='red')
-    plt.plot([x_min, x_max], [regLin.Calcular(x_min), regLin.Calcular(x_max)], label=f'$R^2 = {regLin.R2:.3f}$', color='blue')
+    plt.plot(factorD, mod, 'o', color='red')
+    plt.plot([x_min, x_max], [regLin.Calcular(x_min), regLin.Calcular(x_max)], label=f'$R^2 = {regLin.R2:.3f}$ ; $a = {a:.3f}$', color='blue')
     #plt.xlim( , )
-    plt.ylim(0.5,6.5)
-    plt.xlabel(r'$2\theta$ [$\degree$]')
-    plt.ylabel(r'$I_{relative}$ [counts]')
+    #plt.ylim( , )
+    plt.xlabel(r'$h^2 + k^2 + l^2$')
+    plt.ylabel(r'$\frac{1}{d^2}$')
     plt.grid(True)
     plt.legend(loc = 'lower right')
     plt.savefig(f'entrega1/informe/images/{name}.png', dpi=300, bbox_inches='tight')
     #plt.show()
+    print(f'{name}, {a}')
