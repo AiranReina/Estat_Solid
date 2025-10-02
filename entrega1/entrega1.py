@@ -91,11 +91,15 @@ plt.grid(True)
 plt.savefig('entrega1/informe/images/grafic_experimental_peaks.png', dpi=300, bbox_inches='tight')
 #plt.show()
 
+print ("Peaks  = ", np.array(anglePeaks)/2)
+
 
 ################################################################################
 
 
 dExperimental = [waveLength / (2 * np.sin( np.radians( twoTheta / 2 ) )) for twoTheta in anglePeaks]
+print("dExp   = ", np.array(dExperimental))
+print('')
 factorD = [1 / (d ** 2) for d in dExperimental]
 
 
@@ -162,23 +166,24 @@ mods = [modSC[:len(factorD)], modBCC[:len(factorD)], modFCC[:len(factorD)], modD
 ################################################################################
 
 
-for mod, name in zip(mods, ['SC', 'BCC', 'FCC', 'Diamond']):
+for mod, name in zip(mods, ['SC', 'BCC', 'FCC', 'Diamant']):
 
-    regLin = RegLin(factorD, mod)
-    x_min, x_max = 0, 0.7
+    regLin = RegLin(mod, factorD)
+    x_min, x_max = 0, 20
 
     a = 1/np.sqrt(regLin.pendent)
 
     plt.style.use('classic')
     plt.figure(figsize=(6,6), facecolor='white')
-    plt.plot(factorD, mod, 'o', color='red')
+    plt.plot(mod, factorD, 'o', color='red')
     plt.plot([x_min, x_max], [regLin.Calcular(x_min), regLin.Calcular(x_max)], label=f'$R^2 = {regLin.R2:.3f}$ ; $a = {a:.3f}$', color='blue')
     #plt.xlim( , )
     #plt.ylim( , )
-    plt.xlabel(r'$h^2 + k^2 + l^2$')
-    plt.ylabel(r'$\frac{1}{d^2}$')
+    plt.ylabel(r'$h^2 + k^2 + l^2$')
+    plt.xlabel(r'$\frac{1}{d^2}$')
     plt.grid(True)
     plt.legend(loc = 'lower right')
+    plt.title(f'Estructura {name}')
     plt.savefig(f'entrega1/informe/images/{name}.png', dpi=300, bbox_inches='tight')
     #plt.show()
     print(f'{name}, {a}')
