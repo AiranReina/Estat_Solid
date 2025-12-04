@@ -1,0 +1,225 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{tabto}
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{yfonts}
+\usepackage[style=numeric-comp, sorting=none]{biblatex}
+\bibliography{bib.bib}
+\newcommand{\figuretag}[1]{%
+  \addtocounter{figure}{-1}%
+  \renewcommand{\thefigure}{#1}%
+}
+
+\setcounter{tocdepth}{1}
+\renewcommand{\cftdot}{.}
+
+% Configurar las cabeceras para todas las páginas
+\pagestyle{fancy}
+\lhead{Entrega 2}
+\rhead{}
+
+% Para que la cabecera aparezca también en la primera página
+\fancypagestyle{plain}{%
+  \fancyhf{} % Limpiar cabeceras y pies de página
+  \lhead{Entrega 2} % Añadir la cabecera en la primera página
+  \rhead{} % Vaciar la cabecera derecha
+}
+
+\title{{\textbf{\Large ENTREGA 2: CONDUCTIVITAT
+}\\}}
+
+\author{Reina Delgado, Airan (1670808)\\}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent \textcolor{red}{\textbf{Nota:} El codi emprat per a l'anàlisi de dades, els cálculs i la generació de grafics es pot trobar en el GitHub associat a aquesta entrega: \url{https://github.com/AiranReina/Estat_Solid}. El repositori serà emprat per a futures entregues, per tant, cal llegir el README per entendre l'estructura del mateix.}
+
+\vspace{5mm}
+
+\noindent Aquesta entrega tracta sobre l'estudi de la conductivitat tèrmica en un cristall de silici. A la taula explicitada al guió de l'entrega, es mostren els valors esperimentals de la conductivitat tèrmica $\lambda$ [$W/mK$] i la capacitat calorífica $c_v$ [$J\cdot mol/K$] en funció de la temperatura $T$ [$K$]. Les unitats del calor específic les podem deduir pel fet que a altes temperatures tendeix a la llei de Dulong-Petit que és $c_v = 3R$, amb $R = 8.314 J/(mol \cdot K)$. Per poder observar millor la dependència de les propietats amb la temperatura, es mostren els gràfics de $\lambda(T)$ i $c_v(T)$ a la figura \ref{fig:lambda_cv_T}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/lambda_T.png}
+        \caption{Conductivitat tèrmica $\lambda$ en funció de la temperatura $T$.}
+        \label{fig:lambda_T}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/cv_T.png}
+        \caption{Capacitat calorífica $c_v$ en funció de la temperatura $T$.}
+        \label{fig:cv_T}
+    \end{subfigure}
+    \caption{Propietats tèrmiques del silici en funció de la temperatura.}
+    \label{fig:lambda_cv_T}
+\end{figure}
+
+\noindent Com es pot observar a la figura \ref{fig:cv_T}, la capacitat calorífica $c_v$ segueix una corva proporcional a $T^3$ a baixes temperatures, tal i com prediu el model de Debye. Si fem un ajust lineal de $c_v$ en funció de $T^3$ a temperatures per sota dels 10K, obtenim un pendent proporcional a $\theta _D ^{-3}$ (ón $\theta_D$ és la temperatura de Debye). La figura \ref{fig:cv_T3} mostra l'ajust realitzat ón el pendent és $pend = (12/5)\pi ^4 n k_B \theta _D ^{-3}$. El pendent obtingut és $pend = (4.2412 \pm 0.0032)·10^{-8} J/mol·K^4$, el que ens permet calcular la temperatura de Debye donant $\theta _D = 357.81 K$. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/cv_T3.png}
+    \caption{Capacitat calorífica $c_v$ en funció de $T^3$ a baixes temperatures ($T<10K$).}
+    \label{fig:cv_T3}
+\end{figure}
+
+\newpage
+
+\noindent Un cop tenim l'anàlisi fet, podem calcular el camí lliure mitjà $l$ dels fonons al cristall de silici a partir de l'equació de la conductivitat tèrmica $\lambda = (1/3)c c_v l$ ón $c$ és la velocitat del só al Silici. Cal recalcar que, al aïllar, ens ha de donar que les unitats de $l$ són metres. Si emprem la $c_v$ en $J\cdot mol/K$, no ens donarà les unitats correctes, per tant, primer hem de convertir la capacitat calorífica a la volumètrica ([$J/m^3K$]) mitjançant la relació $c_v^{vol} = c_v \cdot (n_{Si}/N_A)$, ón $n_{Si}$ és la densitat atòmica del silici. Un cop fet aquest pas i trobat la $l$ per cada temperatura, podem observar la seva dependència a la figura \ref{fig:mfp_T_notzoomed}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T.png}
+        \caption{Camí lliure mitjà $l$ en funció de la temperatura $T$.}
+        \label{fig:mfp_T_notzoomed}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T_zoomed.png}
+        \caption{Camí lliure mitjà $l$ a valors de T baixos en funció de la temperatura $T$.}
+        \label{fig:mfp_T_zoomed}
+    \end{subfigure}
+    \caption{Camí lliure mitjà dels fonons en funció de la temperatura.}
+    \label{fig:mfp_T}
+\end{figure}
+
+\noindent Com es pot observar a la figura \ref{fig:mfp_T_notzoomed}, el camí lliure mitjà dels fonons decreix amb la temperatura. A temperatures altes ($T>100K$), el camí lliure mitjà és de l'ordre de nanòmetres, mentre que a baixes temperatures ($T<10K$) arriba a valors de l'ordre del mil·límetre. Com que el nombre d'impureses és constant (El suposarem petit), a temperatures altes el camí lliure mitjà està dominat per les dispersions fonó-fonó mentre que, a baixes temperatures, el camí lliure mitjà està dominat pels efectes de les fronteres del cristall. Quan pràcticament només es considera el recurregut lliure mitjà degut a les fronteres, $l \approx L$ ón $L$ és la mida característica de la mostra. Com es pot observar a la figura \ref{fig:mfp_T_zoomed}, la tendència a temperatures baixes és d'estabilitzar la $l$ a la mesura, però els 2 valors a menor temperatura semblen disparar-se. Degut a aquest comportament anòmal els descartem per l'anàlisi. En aquest cas, podem estimar que el tamany de la mostra és de l'ordre dels $0.55-0.60mm$ (Considerant un petit rang ja que faltaríen les dades a menor temperatura que hem eliminat).
+
+\vspace{5mm}
+
+\noindent D'altra banda, a temperatures altes, el terme dominant és el de les dispersions fonó-fonó. Per poder analitzar quina dependéncia té el camí lliure mitjà amb la temperatura en aquesta regió, podem fer un ajust lineal de $\ln(l)$ en funció de $\ln(T)$ i, per tant, el pendent serà l'exponent de $T$. La gràfica resultant es mostra a la figura \ref{fig:mfp_T_logarithmic}, ón es pot observar que el pendent obtingut és $-1.094 \pm 0.047$, que s'apropa bastant al valor teoric de $-1$ esperat per les dispersions fonó-fonó.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/mfp_T_logarithmic.png}
+    \caption{Camí lliure mitjà $l$ en funció de la temperatura $T$ en escala logarítmica (Per $T$ elevades).}
+    \label{fig:mfp_T_logarithmic}
+\end{figure}
+
+\noindent Finalment, podem generalitzar aquest mètode per estimar la conductivitat tèrmica en mostres de dimensions reduïdes. Segons la regla de Matthiessen per la dispersió de fonons, les resistivitats tèrmiques (inverses de la conductivitat) s'afegeixen, per tant:
+
+\[
+\frac{1}{\lambda_{\text{total}}} = \frac{1}{\lambda_{\text{bulk}}} + \frac{1}{\lambda_{\text{boundary}}},
+\]
+
+\noindent Ón $\lambda_{\text{boundary}} = \frac{1}{3} c_v c L$ representa la contribució limitada per la dispersió a les fronteres de la mostra de mida $L$. Les dades del mfp ($l$) de la taula del guió corresponen a una mostra macroscòpica (amb $L \approx 0.6$ mm), de manera que podem considerar la $\lambda_{bulk}$ com la de la mostra original (No es veuen efectes de frotera ni tan sols a 10$K$ així doncs només estàn explicitats els processos de dispersió interns). A la taula següent es mostren els valors de conductivitat tèrmica obtinguts per a diferents mides de mostra i temperatures.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Mida $L$} & \textbf{$T$ [K]} & \textbf{$\lambda$ [W/mK]} \\
+        \hline
+        1$\mu m$ & 10$K$ & 7.505 \\
+        1$\mu m$ & 100$K$ & 632.469 \\
+        1$\mu m$ & 500$K$ & 68.882 \\
+        \hline
+        100$nm$ & 10$K$ & 0.752 \\
+        100$nm$ & 100$K$ & 193.792 \\
+        100$nm$ & 500$K$ & 60.232 \\
+        \hline
+        10$nm$ & 10$K$ & 0.075 \\
+        10$nm$ & 100$K$ & 24.420 \\
+        10$nm$ & 500$K$ & 26.700 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\noindent Com es pot observar, la reducció de la mida de la mostra provoca una disminució significativa de la conductivitat tèrmica, especialment a baixes temperatures. Això es deu al fet que la dispersió a les fronteres esdevé el mecanisme dominant per a la resistència tèrmica en mostres petites, limitant així l'eficiència del transport de calor. Per poder analitzar quan es comença a observar els efectes de frontera, podem estudiar el mfp $l$ a cada mostra amb la mateixa regla de Matthiessen. Els resultats es poden trobar a les gràfiques \ref{fig:mfp_T_mides}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T_1e-06.png}
+        \caption{Camí lliure mitjà $l$ en funció de la temperatura $T$ per la mostra de mida 1$\mu m$.}
+        \label{fig:mfp_T_1e-06}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T_1e-07.png}
+        \caption{Camí lliure mitjà $l$ a valors de T baixos en funció de la temperatura $T$ per la mostra de mida 100$nm$.}
+        \label{fig:mfp_T_1e-07}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T_1e-08.png}
+        \caption{Camí lliure mitjà $l$ en funció de la temperatura $T$ per la mostra de mida 10$nm$.}
+        \label{fig:mfp_T_1e-08}
+    \end{subfigure}    
+    \caption{Camí lliure mitjà dels fonons en funció de la temperatura per diferents mides de mostra.}
+    \label{fig:mfp_T_mides}
+    
+\end{figure}
+
+\noindent Com es pot observar a les figures \ref{fig:mfp_T_mides}, a mesura que la mida de la mostra disminueix, el camí lliure mitjà $l$ de saturació s'adequa a la nova mida de la mostra. Això indica que els fonons estan cada cop més limitats per les fronteres de la mostra, especialment a baixes temperatures. D'altra banda, a altes temperatures segueixen un comportament similar, fins i tot, amb la mostra macroscòpica, ja que el camí lliure mitjà és molt més petit que la mida de la mostra. Per poder trobar exactament la temperatura a la qual els efectes de frontera comencen a ser significatius, podem fer un zoom com vam fer a la figura \ref{fig:mfp_T_zoomed} i observar a partir de quina temperatura el camí lliure mitjà comença a estabilitzar-se. Els resultats es poden trobar als gràfics \ref{fig:mfp_T_mides_zoomed}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T_1e-06_zoomed.png}
+        \caption{Camí lliure mitjà $l$ en funció de la temperatura $T$ per la mostra de mida 1$\mu m$.}
+        \label{fig:mfp_T_1e-06_zoomed}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T_1e-07_zoomed.png}
+        \caption{Camí lliure mitjà $l$ a valors de T baixos en funció de la temperatura $T$ per la mostra de mida 100$nm$.}
+        \label{fig:mfp_T_1e-07_zoomed}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/mfp_T_1e-08_zoomed.png}
+        \caption{Camí lliure mitjà $l$ en funció de la temperatura $T$ per la mostra de mida 10$nm$.}
+        \label{fig:mfp_T_1e-08_zoomed}
+    \end{subfigure}    
+    \caption{Camí lliure mitjà dels fonons en funció de la temperatura per diferents mides de mostra (Zoom a baixes temperatures).}
+    \label{fig:mfp_T_mides_zoomed}
+\end{figure}
+
+\noindent Com es pot observar a les figures \ref{fig:mfp_T_mides_zoomed}, la temperatura a la qual els efectes de frontera comencen a ser significatius augmenta a mesura que la mida de la mostra disminueix. Per a la mostra de 1$\mu m$, els efectes de frontera es fan evidents per sota dels 20K, mentre que per a la mostra de 100$nm$, aquesta temperatura augmenta fins als 50K. Finalment, per a la mostra de 10$nm$, els efectes de frontera són dominants fins i tot per sota dels 100K. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
